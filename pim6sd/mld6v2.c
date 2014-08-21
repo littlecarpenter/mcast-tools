@@ -42,6 +42,15 @@
  *
  */
 
+/* In order to solve this compile error, caused by un-defined "__USE_GNU".
+ * Because in6_pktinfo is defined in the domain of __USE_GNU.
+ * Symptom:
+ * mld6.c:368:23: error: invalid application of ‘sizeof’ to incomplete type ‘struct in6_pktinfo’
+ * Solution:
+ * Use _GNU_SOURCE
+ * http://gcc.gnu.org/ml/fortran/2005-10/msg00365.html
+ * */
+#define _GNU_SOURCE
 
 #include <sys/types.h>
 #include <sys/param.h>

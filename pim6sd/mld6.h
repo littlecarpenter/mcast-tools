@@ -68,12 +68,13 @@ int send_mld6 __P((int type, int code, struct sockaddr_in6 *src,
 		   int index, int delay, int datalen, int alert));
 
 /* portability with older KAME headers */
-#ifndef MLD_LISTENER_QUERY
-#define MLD_LISTENER_QUERY	130
-#define MLD_LISTENER_REPORT	131
 #define MLD_LISTENER_DONE	132
 #define MLD_MTRACE_RESP		201
 #define MLD_MTRACE		202
+
+#ifndef MLD_LISTENER_QUERY
+#define MLD_LISTENER_QUERY	130
+#define MLD_LISTENER_REPORT	131
 
 #ifndef HAVE_MLD_HDR
 struct mld_hdr {

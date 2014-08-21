@@ -74,6 +74,15 @@
  *
  */
 
+/* In order to solve this compile error, caused by un-defined "__USE_GNU".
+ * Because in6_pktinfo is defined in the domain of __USE_GNU.
+ * Symptom:
+ * mld6.c:368:23: error: invalid application of ‘sizeof’ to incomplete type ‘struct in6_pktinfo’
+ * Solution:
+ * Use _GNU_SOURCE
+ * http://gcc.gnu.org/ml/fortran/2005-10/msg00365.html
+ * */
+#define _GNU_SOURCE
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/socket.h>
@@ -107,6 +116,16 @@
 #include "route.h"
 #include "trace.h"
 #include "mld6.h"
+
+/* MACRO */
+/* The code below is define in "/usr/include/netinet/icmp6.h"
+#define MLD_LISTENER_QUERY          130
+#define MLD_LISTENER_REPORT         131
+#define MLD_LISTENER_REDUCTION      132
+**/
+#define ICMP6_MEMBERSHIP_QUERY		MLD_LISTENER_QUERY
+#define ICMP6_MEMBERSHIP_REPORT		MLD_LISTENER_REPORT
+#define ICMP6_MEMBERSHIP_REDUCTION	MLD_LISTENER_REDUCTION
 
 /*
  * Exported variables.
